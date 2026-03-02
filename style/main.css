@@ -402,5 +402,94 @@
 .product-card button {
     width: 100%;
 }
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+.hero-content h1 {
+    font-size: 48px;
+    color: white;
+}
+
+.hero-content p {
+    font-size: 20px;
+    color: white;
+    margin: 10px 0 20px;
+}
+
+.shop-btn {
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: yellow;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.watchlist-header {
+    text-align: right;
+    padding: 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.watchlist-box {
+    display: none;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+.wishlist-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.wishlist-btn.active {
+    color: red;
+}
+/* ================= CATEGORY ICON SECTION ================= */
+
+.category-icons-section {
+    padding: 30px 40px;
+    background: white;
+}
+
+.category-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    overflow-x: auto;   /* scroll on mobile */
+}
+
+.category-item {
+    text-align: center;
+    cursor: pointer;
+    min-width: 120px;
+    transition: 0.3s ease;
+}
+
+.category-item img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;   /* makes image circular */
+    background: #f3f3f3;
+    padding: 8px;
+}
+
+.category-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.category-item:hover {
+    transform: scale(1.08);
+}
 

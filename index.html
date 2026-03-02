@@ -5,9 +5,8 @@
     <title>E-Commerce Website</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="style/main.css">
-    
+
     <style>
         * {
             margin: 0;
@@ -42,22 +41,10 @@
             font-size: 16px;
         }
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-
         .search-bar input {
             padding: 5px 10px;
             border-radius: 3px;
             border: none;
-        }
-
-        .icons {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
         }
 
         .cart {
@@ -81,84 +68,92 @@
             cursor: pointer;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .search-bar {
-                display: none;
-            }
-
-            .hamburger {
-                display: block;
-            }
+            nav ul { display: none; }
+            .search-bar { display: none; }
+            .hamburger { display: block; }
         }
     </style>
 </head>
+
 <body>
+
+<!-- ================= HEADER ================= -->
 <header>
-    <!-- Logo -->
     <div class="logo">MyShop</div>
 
-    <!-- Navigation Menu -->
     <nav>
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
+            <li><a href="#products">Products</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Search Bar -->
     <div class="search-bar">
         <input type="text" placeholder="Search products...">
     </div>
 
-    <!-- Icons -->
-    <!-- Cart Image -->
-<div class="cart">
-    <img src="assets/cart1.webp" alt="Cart" class="cart-img">
-    <span class="cart-count" id="cartCount">0</span>
-</div>
-
-
-        <!-- Hamburger Menu -->
-        <div class="hamburger">
-             ☰
-        </div>
+    <div class="cart">
+        <!-- You can keep this OR replace with online icon later -->
+        <img src="assets/cart1.webp" alt="Cart" class="cart-img">
+        <span id="cartCount">0</span>
     </div>
+
+    <div class="hamburger">☰</div>
 </header>
-<!-- Hero Section -->
+
+
+<!-- ================= HERO SECTION ================= -->
 <section class="hero">
     <div class="hero-content">
         <h1>Biggest Sale of the Year!</h1>
-        <p>Discover amazing deals on the latest products. Limited time offer!</p>
-        <a href="#" class="hero-btn">Shop Now</a>
+        <p>Up to 70% off on selected products. Shop now before it ends!</p>
+        <a href="#products" class="hero-btn">Shop Now</a>
     </div>
 </section>
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <h1 class="fade-in">Biggest Sale of the Year!</h1>
-        <p class="fade-in delay">Up to 70% off on selected products. Shop now before it ends!</p>
-        <a href="#products" class="hero-btn fade-in delay2">Shop Now</a>
+<!-- ================= CATEGORY ICON SECTION ================= -->
+<section class="category-icons-section">
+    <div class="category-icons">
+
+        <div class="category-item" onclick="filterCategory('women\'s clothing')">
+            <img src="assets\ethnic.webp">
+            <p>Ethnic Wear</p>
+        </div>
+
+        <div class="category-item" onclick="filterCategory('men\'s clothing')">
+            <img src="assets\men.webp">
+            <p>Menswear</p>
+        </div>
+
+        <div class="category-item" onclick="filterCategory('Home Decors')">
+            <img src="assets\shoes.webp">
+            <p>Footwear</p>
+        </div>
+
+        <div class="category-item" onclick="filterCategory('shoes')">
+            <img src="assets\home_decore.webp">
+            <p>Home Decor</p>
+        </div>
+         <div class="category-item" onclick="filterCategory('kitchen')">
+            <img src="assets\kitchen.webp">
+            <p>Kitchen tools</p>
+        </div>
+
     </div>
 </section>
+
+
 <!-- ================= PRODUCTS SECTION ================= -->
-<section class="products-section">
-    <h2 class="section-title">Our Products</h2>
-    <div class="product-grid" id="productGrid">
-        <!-- Products will load dynamically here -->
-    </div>
+<section class="products-section" id="products">
+    <h2>My products</h2>
+    <div id="productGrid" class="product-grid"></div>
 </section>
 
 
-
-
+<!-- ================= SCRIPT ================= -->
 <script src="scripts/app.js"></script>
-</body>
 
+</body>
 </html>
