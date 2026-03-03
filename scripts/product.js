@@ -9,6 +9,12 @@ const productContainer = document.getElementById("productContainer");
 const loading = document.getElementById("loading");
 const title = document.getElementById("product-title");
 const price = document.getElementById("product-price");
+const cartBtn = document.getElementById("detail-cart-btn");
+
+cartBtn.dataset.id = product.id;
+cartBtn.dataset.title = product.title;
+cartBtn.dataset.price = product.price;
+cartBtn.dataset.image = product.image;
 
 title.innerText = "Product Name";
 price.innerText = "₹999";console.log("Product JS Connected");
@@ -92,3 +98,76 @@ function addToCart(id) {
 function addToWishlist(id) {
     alert("Product added to wishlist!");
 }
+/* ================= PRODUCT PAGE CART ================= */
+
+function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function updateCartCount() {
+    const cart = getCart();
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    const cartCount = document.getElementById("cartCount");
+    if (cartCount) {
+        cartCount.innerText = total;
+    }
+}
+
+function showPopup(message) {
+    const popup = document.getElementById("cartPopup");
+    if (!popup) return;
+
+    popup.innerText = message;
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 2000);
+}
+
+function addToCart(product) {
+
+    let cart = getCart();
+
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        product.quantity = 1;
+        cart.push(product);
+    }
+
+    saveCart(cart);
+    updateCartCount();
+    showPopup("Item added to cart!");
+}
+
+document.addEventListener("click", function (e) {
+
+    if (e.target.classList.contains("cart-btn")) {
+
+        const id = e.target.getAttribute("data-id");
+        const title = e.target.getAttribute("data-title");
+        const price = parseFloat(e.target.getAttribute("data-price"));
+        const image = e.target.getAttribute("data-image");
+
+        if (!id) {
+            console.log("No product ID found");
+            return;
+        }
+
+        addToCart({
+            id,
+            title,
+            price,
+            image
+        });
+    }
+
+});

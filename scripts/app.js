@@ -73,23 +73,33 @@ function displayProducts(products) {
             <img src="${product.image}" alt="${product.title}">
             <h3>${product.title}</h3>
             <p>$${product.price}</p>
-            <button onclick="addToCart(${product.id})">Add to Cart</button>
+            <div class="action-buttons">
+    <button class="cart-btn"
+        onclick="addToCart(${product.id})">
+        Add to Cart
+    </button>
+
+    <button class="wishlist-btn"
+        onclick="addToWishlist(${product.id})">
+        ❤️
+    </button>
+</div>
         `;
-        productCard.innerHTML = `
-    <img src="${product.image}" alt="${product.title}">
-    <h3>${product.title}</h3>
-    <p>$${product.price}</p>
+        function addToCart(product) {
 
-    <div class="button-group">
-        <button class="cart-btn" onclick="addToCart(${product.id})">
-            Add to Cart
-        </button>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-        <button class="wishlist-btn" onclick="addToWishlist(${product.id})">
-            ❤️
-        </button>
-    </div>
-`;
+    const existing = cart.find(item => item.id == product.id);
+
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        product.quantity = 1;   // ⭐ IMPORTANT
+        cart.push(product);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
         // 👇 Redirect to product detail page
         productCard.addEventListener("click", (e) => {
@@ -113,26 +123,28 @@ function filterCategory(category) {
 
 // ================= ADD TO CART =================
 function addToCart(id) {
+
     const product = allProducts.find(p => p.id === id);
     if (!product) return;
 
-    const alreadyInCart = cart.find(item => item.id === id);
+    const existing = cart.find(item => item.id === id);
 
-    if (alreadyInCart) {
-        showPopup("Product already in cart ⚠️");
-        return;
+    if (existing) {
+        existing.quantity += 1;
+    } else {
+        product.quantity = 1;  // ⭐ Important
+        cart.push(product);
     }
 
-    cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
 
     if (cartCounter) {
-        cartCounter.textContent = cart.length;
+        cartCounter.textContent =
+            cart.reduce((sum, item) => sum + item.quantity, 0);
     }
 
     showPopup("Added to cart ✅");
 }
-
 // ================= ADD TO WISHLIST =================
 function addToWishlist(id) {
     const product = allProducts.find(p => p.id === id);
