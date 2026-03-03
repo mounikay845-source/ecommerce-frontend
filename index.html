@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         * {
@@ -47,6 +48,22 @@
             border: none;
         }
 
+        .wishlist-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .wishlist-icon span {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
         .cart {
             position: relative;
         }
@@ -74,7 +91,6 @@
             .hamburger { display: block; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -95,21 +111,19 @@
     <div class="search-bar">
         <input type="text" placeholder="Search products...">
     </div>
+
     <div class="wishlist-icon">
-    <i class="fa fa-heart"></i>
-    <span id="wishlistCount">0</span>
-</div>
+        <i class="fa fa-heart"></i>
+        <span id="wishlistCount">0</span>
+    </div>
    
     <div class="cart">
-        <!-- You can keep this OR replace with online icon later -->
-        
         <img src="assets/cart1.webp" alt="Cart" class="cart-img">
         <span id="cartCount">0</span>
     </div>
 
     <div class="hamburger">☰</div>
 </header>
-
 
 <!-- ================= HERO SECTION ================= -->
 <section class="hero">
@@ -119,8 +133,8 @@
         <a href="#products" class="hero-btn">Shop Now</a>
     </div>
 </section>
-<!-- ================= CATEGORY ICON SECTION ================= -->
-<!-- ================= CATEGORY ICON SECTION ================= -->
+
+<!-- ================= CATEGORY SECTION ================= -->
 <section class="category-icons-section">
     <div class="category-icons">
 
@@ -152,22 +166,21 @@
     </div>
 </section>
 
-
 <!-- ================= PRODUCTS SECTION ================= -->
 <section class="products-section" id="products">
     <h2>Our Products</h2>
-    <div id="loading">Loading products...</div>
-<div id="errorMessage"></div>
 
-<div id="productGrid" class="product-grid"></div>
+    <div id="loading">Loading products...</div>
+    <div id="errorMessage"></div>
+
     <div id="productGrid" class="product-grid"></div>
 </section>
 
+<!-- ===== Add To Cart Popup ===== -->
+<div id="cartPopup" class="cart-popup"></div>
 
 <!-- ================= SCRIPT ================= -->
 <script src="scripts/app.js"></script>
-<!-- ===== Add To Cart Popup ===== -->
-<div id="cartPopup" class="cart-popup"></div>
 
 </body>
 </html>

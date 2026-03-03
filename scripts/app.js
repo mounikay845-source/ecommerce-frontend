@@ -62,27 +62,43 @@ fetch("https://fakestoreapi.com/products")
 
 // ================= DISPLAY PRODUCTS =================
 function displayProducts(products) {
-    if (!productGrid) return;
-
+    const productGrid = document.getElementById("productGrid");
     productGrid.innerHTML = "";
 
     products.forEach(product => {
-        const card = document.createElement("div");
-        card.classList.add("product-card");
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
 
-        card.innerHTML = `
-            <img src="${product.image}" loading="lazy">
-            <h3>${product.title.substring(0, 40)}...</h3>
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
             <p>$${product.price}</p>
-            <button class="btn" onclick="addToCart(${product.id})">
-                Add to Cart
-            </button>
-            <button class="wishlist-btn" onclick="addToWishlist(${product.id})">
-                ❤️
-            </button>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
         `;
+        productCard.innerHTML = `
+    <img src="${product.image}" alt="${product.title}">
+    <h3>${product.title}</h3>
+    <p>$${product.price}</p>
 
-        productGrid.appendChild(card);
+    <div class="button-group">
+        <button class="cart-btn" onclick="addToCart(${product.id})">
+            Add to Cart
+        </button>
+
+        <button class="wishlist-btn" onclick="addToWishlist(${product.id})">
+            ❤️
+        </button>
+    </div>
+`;
+
+        // 👇 Redirect to product detail page
+        productCard.addEventListener("click", (e) => {
+            if (e.target.tagName !== "BUTTON") {
+                window.location.href = `product.html?id=${product.id}`;
+            }
+        });
+
+        productGrid.appendChild(productCard);
     });
 }
 
