@@ -57,9 +57,7 @@ function login(){
         window.location.href = "index.html";
 
     } else {
-
         alert("Invalid email or password");
-
     }
 
 }
