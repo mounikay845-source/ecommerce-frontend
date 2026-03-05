@@ -10,6 +10,11 @@ const cartCounter = document.getElementById("cartCount");
 const wishlistCounter = document.getElementById("wishlistCount");
 const loading = document.getElementById("loading");
 const errorMessage = document.getElementById("errorMessage");
+let user = localStorage.getItem("loggedInUser");
+
+if(!user){
+    window.location.href = "login.html";
+}
 
 // ================= UPDATE COUNTERS =================
 if (cartCounter) {
@@ -124,24 +129,28 @@ function filterCategory(category) {
 // ================= ADD TO CART =================
 function addToCart(id) {
 
-    const product = allProducts.find(p => p.id === id);
-    if (!product) return;
+    let loggedUser = localStorage.getItem("loggedInUser");
 
-    const existing = cart.find(item => item.id === id);
-
-    if (existing) {
-        existing.quantity += 1;
-    } else {
-        product.quantity = 1;  // ⭐ Important
-        cart.push(product);
+    if(!loggedUser){
+        alert("Please login first");
+        window.location.href = "login.html";
+        return;
     }
+
+    const product = allProducts.find(p => p.id === id);
+
+    const alreadyInCart = cart.find(item => item.id === id);
+
+    if(alreadyInCart){
+        showPopup("Product already in cart ⚠️");
+        return;
+    }
+
+    cart.push(product);
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    if (cartCounter) {
-        cartCounter.textContent =
-            cart.reduce((sum, item) => sum + item.quantity, 0);
-    }
+    cartCounter.textContent = cart.length;
 
     showPopup("Added to cart ✅");
 }

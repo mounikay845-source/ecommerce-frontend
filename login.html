@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+        .body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f4f8f7 0%, #aa52aa 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgb(242, 240, 239);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background: #667eea;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .forgot-link {
+            display: block;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .forgot-link a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+
+        .register-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: hsl(307, 45%, 89%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Main Box */
+.login-box {
+    width: 350px;
+    background: #56657a;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    color: white;
+}
+
+/* Top Avatar */
+.avatar {
+    width: 70px;
+    height: 70px;
+    background: #a3b3d1;
+    border-radius: 50%;
+    margin-top:50px;
+    margin: -30px auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+/* Input Fields */
+.input-box {
+    position: relative;
+    margin: 20px 0;
+}
+
+.input-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aa4e4e;
+}
+
+.input-box input {
+    width: 85%;
+    padding: 12px 12px 12px 40px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    background: #bbc4d8;
+    color: white;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(to right, #69b2c1, #00f2fe);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.forgot {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body class="body">
+
+<div class="container">
+    <div class="avatar">
+           <i class="fa fa-user"></i>
+        </div>
+          <h2>Login</h2>
+    <form id="loginForm">
+        
+        <div class="input-box">
+            <i class="fa fa-envelope"></i>
+            <input type="email" id="email" placeholder="Enter Email..." required>
+        </div>
+
+        <div class="input-box">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="password" placeholder="Password..." required>
+        </div>
+
+        <button type="button" onclick="login()">Login</button>
+
+    </form>
+    <div class="forgot-link"> 
+        <a href="forgot.html">Forgot Password?</a>
+     </div> 
+    <div class="register-link"> 
+        Don't have an account? <a href="signup.html">Signup</a> 
+    </div>
+
+<script src="scripts/auth.js"></script>
+
+</body>
+</html>

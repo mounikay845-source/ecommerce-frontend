@@ -90,6 +90,9 @@
             .search-bar { display: none; }
             .hamburger { display: block; }
         }
+        .logout-btn{
+            cursor:pointer;
+        }
     </style>
 </head>
 
@@ -105,8 +108,12 @@
             <li><a href="#products">Products</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Signup</a></li>
+            
         </ul>
     </nav>
+    <button onclick="logout()" class="logout-btn">Logout</button>
 
     <div class="search-bar">
         <input type="text" placeholder="Search products...">
@@ -181,6 +188,7 @@
 
 <!-- ================= SCRIPT ================= -->
 <script src="scripts/app.js"></script>
+<script src="scripts/auth.js"></script>
 
 </body>
 </html>
