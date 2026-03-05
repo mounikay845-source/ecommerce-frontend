@@ -32,6 +32,7 @@ function signup() {
 
     // save to localStorage
     localStorage.setItem("users", JSON.stringify(users));
+    
 
     alert("Signup successful!");
 
