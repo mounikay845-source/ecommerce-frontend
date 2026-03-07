@@ -75,12 +75,7 @@ function displayProducts(products) {
         productCard.classList.add("product-card");
 
         productCard.innerHTML = `
-            <img src="${product.image}" 
-         alt="${product.title}" 
-         loading="lazy" 
-         decoding="async" 
-         width="200" 
-         height="200">
+           <img src="${product.image}" alt="${product.title}" loading="lazy">
             <h3>${product.title}</h3>
             <p>$${product.price}</p>
             <div class="action-buttons">
