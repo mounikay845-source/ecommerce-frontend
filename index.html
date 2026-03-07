@@ -9,91 +9,142 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: #222;
-            color: white;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#222;
+color:white;
+}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+/* LOGO */
+.logo{
+font-size:24px;
+font-weight:bold;
+}
 
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-        }
+/* NAVIGATION */
+nav ul{
+list-style:none;
+display:flex;
+gap:20px;
+}
 
-        .search-bar input {
-            padding: 5px 10px;
-            border-radius: 3px;
-            border: none;
-        }
+nav ul li a{
+text-decoration:none;
+color:white;
+font-size:16px;
+transition:0.3s;
+}
 
-        .wishlist-icon {
-            position: relative;
-            cursor: pointer;
-        }
+nav ul li a:hover{
+color:orange;
+}
 
-        .wishlist-icon span {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
+/* SEARCH BAR */
+.search-bar input{
+padding:5px 10px;
+border-radius:3px;
+border:none;
+}
 
-        .cart {
-            position: relative;
-        }
+/* WISHLIST */
+.wishlist-icon{
+position:relative;
+cursor:pointer;
+}
 
-        .cart span {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
+.wishlist-icon span{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:2px 6px;
+border-radius:50%;
+}
 
-        .hamburger {
-            display: none;
-            font-size: 22px;
-            cursor: pointer;
-        }
+/* CART */
+.cart{
+position:relative;
+}
 
-        @media (max-width: 768px) {
-            nav ul { display: none; }
-            .search-bar { display: none; }
-            .hamburger { display: block; }
-        }
-        .logout-btn{
-            cursor:pointer;
-        }
-    </style>
+.cart span{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:white;
+font-size:12px;
+padding:2px 6px;
+border-radius:50%;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn{
+cursor:pointer;
+padding:6px 10px;
+border:none;
+background:#ff4d4d;
+color:white;
+border-radius:4px;
+}
+
+/* HAMBURGER ICON */
+.hamburger{
+display:none;
+font-size:22px;
+cursor:pointer;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width:768px){
+
+nav{
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:#333;
+display:none;
+}
+
+nav ul{
+flex-direction:column;
+text-align:center;
+padding:20px;
+}
+
+nav ul li{
+margin:10px 0;
+}
+
+nav.show{
+display:block;
+}
+
+.search-bar{
+display:none;
+}
+
+.hamburger{
+display:block;
+}
+
+}
+
+</style>
 </head>
 
 <body>
@@ -102,17 +153,18 @@
 <header>
     <div class="logo">MyShop</div>
 
-    <nav>
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Signup</a></li>
-            
-        </ul>
-    </nav>
+ <nav id="navbar">
+<ul class="nav-links">
+
+<li><a href="#">Home</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#">About</a></li>
+<li><a href="#">Contact</a></li>
+<li><a href="login.html">Login</a></li>
+<li><a href="signup.html">Signup</a></li>
+
+</ul>
+</nav>
     <button onclick="logout()" class="logout-btn">Logout</button>
 
     <div class="search-bar">
@@ -125,15 +177,21 @@
     </div>
    
     <a href="cart.html" class="cart">
-    <img src="assets/cart1.webp" alt="Cart" class="cart-img">
+    <img src="assets/cart1.webp" alt="Cart" class="cart-img" >
     <span id="cartCount">0</span>
 </a>
-
-    <div class="hamburger">☰</div>
+<div class="hamburger" onclick="toggleMenu()">
+<i class="fa fa-bars"></i>
+</div>
 </header>
 
 <!-- ================= HERO SECTION ================= -->
 <section class="hero">
+    <picture>
+        <source media="(min-width: 1024px)" srcset="assets/hero-large.webp" type="image/webp">
+        <source media="(min-width: 600px)" srcset="assets/hero-medium.webp" type="image/webp">
+        <img src="assets/hero-small.webp" alt="Biggest Sale" class="hero-bg-img" loading="eager">
+    </picture>
     <div class="hero-content">
         <h1>Biggest Sale of the Year!</h1>
         <p>Up to 70% off on selected products. Shop now before it ends!</p>
@@ -146,29 +204,31 @@
     <div class="category-icons">
 
         <div class="category-item" onclick="filterCategory('women\'s clothing')">
-            <img src="assets/ethnic.webp">
-            <p>Ethnic Wear</p>
-        </div>
+    <img src="assets/ethnic.webp" alt="Ethnic Wear" loading="lazy" decoding="async">
+    <p>Ethnic Wear</p>
+</div>
 
-        <div class="category-item" onclick="filterCategory('men\'s clothing')">
-            <img src="assets/men.webp">
-            <p>Menswear</p>
-        </div>
+        
+        <div class="category-item" onclick="filterCategory('women\'s clothing')">
+    <img src="assets/ethnic.webp" alt="Ethnic Wear" loading="lazy" decoding="async">
+     <p>Menswear</p>
+</div>
 
         <div class="category-item" onclick="filterCategory('electronics')">
-            <img src="assets/elec.webp">
-            <p>Electronics</p>
-        </div>
-
+    <img src="assets\elec.webp" alt="Electronics" loading="lazy" decoding="async">
+     <p>Electronics</p>
+</div>
+         
         <div class="category-item" onclick="filterCategory('jewelery')">
-            <img src="assets/jewellery.webp">
-            <p>Jewelry</p>
-        </div>
+    <img src="assets/jewellery.webp" alt="jewellery" loading="lazy" decoding="async">
+      <p>Jewelry</p>
+</div>
 
-        <div class="category-item" onclick="displayProducts(allProducts)">
-            <img src="assets/all.webp">
-            <p>All Products</p>
-        </div>
+        
+        <div class="category-item" onclick="filterCategory('allProducts')">
+    <img src="assets/all.webp" alt="all products" loading="lazy" decoding="async">
+    <p>All Products</p>
+</div>
 
     </div>
 </section>
@@ -185,7 +245,17 @@
 
 <!-- ===== Add To Cart Popup ===== -->
 <div id="cartPopup" class="popup"></div>
+<script>
 
+function toggleMenu(){
+
+const nav=document.getElementById("navbar");
+
+nav.classList.toggle("show");
+
+}
+
+</script>
 <!-- ================= SCRIPT ================= -->
 <script src="scripts/app.js"></script>
 <script src="scripts/auth.js"></script>
