@@ -407,3 +407,19 @@ font-size:14px;
 }
 
 }
+@media(max-width:600px){
+
+.category-item{
+min-width:120px;
+}
+
+.category-item img{
+width:60px;
+height:60px;
+}
+
+.category-item p{
+font-size:12px;
+}
+
+}
