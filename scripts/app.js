@@ -146,7 +146,12 @@ function addToCart(id) {
         return;
     }
 
-    cart.push(product);
+    cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image
+    });
 
     localStorage.setItem("cart", JSON.stringify(cart));
 

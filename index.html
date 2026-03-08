@@ -7,144 +7,8 @@
     
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-    <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 30px;
-background:#222;
-color:white;
-}
-
-/* LOGO */
-.logo{
-font-size:24px;
-font-weight:bold;
-}
-
-/* NAVIGATION */
-nav ul{
-list-style:none;
-display:flex;
-gap:20px;
-}
-
-nav ul li a{
-text-decoration:none;
-color:white;
-font-size:16px;
-transition:0.3s;
-}
-
-nav ul li a:hover{
-color:orange;
-}
-
-/* SEARCH BAR */
-.search-bar input{
-padding:5px 10px;
-border-radius:3px;
-border:none;
-}
-
-/* WISHLIST */
-.wishlist-icon{
-position:relative;
-cursor:pointer;
-}
-
-.wishlist-icon span{
-position:absolute;
-top:-8px;
-right:-10px;
-background:red;
-color:white;
-font-size:12px;
-padding:2px 6px;
-border-radius:50%;
-}
-
-/* CART */
-.cart{
-position:relative;
-}
-
-.cart span{
-position:absolute;
-top:-8px;
-right:-10px;
-background:red;
-color:white;
-font-size:12px;
-padding:2px 6px;
-border-radius:50%;
-}
-
-/* LOGOUT BUTTON */
-.logout-btn{
-cursor:pointer;
-padding:6px 10px;
-border:none;
-background:#ff4d4d;
-color:white;
-border-radius:4px;
-}
-
-/* HAMBURGER ICON */
-.hamburger{
-display:none;
-font-size:22px;
-cursor:pointer;
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width:768px){
-
-nav{
-position:absolute;
-top:70px;
-left:0;
-width:100%;
-background:#333;
-display:none;
-}
-
-nav ul{
-flex-direction:column;
-text-align:center;
-padding:20px;
-}
-
-nav ul li{
-margin:10px 0;
-}
-
-nav.show{
-display:block;
-}
-
-.search-bar{
-display:none;
-}
-
-.hamburger{
-display:block;
-}
-
-}
-
-</style>
 </head>
 
 <body>
@@ -156,10 +20,10 @@ display:block;
  <nav id="navbar">
 <ul class="nav-links">
 
-<li><a href="#">Home</a></li>
+<li><a href="home1.html" class="nav-link">Home</a></li>
+<li><a href="about.html" class="nav-link">About</a></li>
+<li><a href="contact.html" class="nav-link">Contact</a></li>
 <li><a href="#products">Products</a></li>
-<li><a href="#">About</a></li>
-<li><a href="#">Contact</a></li>
 <li><a href="login.html">Login</a></li>
 <li><a href="signup.html">Signup</a></li>
 
@@ -256,9 +120,49 @@ nav.classList.toggle("show");
 }
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+const lazyImages = document.querySelectorAll("img[loading='lazy']");
+
+if("IntersectionObserver" in window){
+
+let observer = new IntersectionObserver(function(entries, observer){
+
+entries.forEach(function(entry){
+
+if(entry.isIntersecting){
+
+let img = entry.target;
+img.src = img.dataset.src || img.src;
+
+observer.unobserve(img);
+
+}
+
+});
+
+});
+
+lazyImages.forEach(function(img){
+observer.observe(img);
+});
+
+}
+
+});
+</script>
+<script>
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+});
+</script>
 <!-- ================= SCRIPT ================= -->
-<script src="scripts/app.js"></script>
-<script src="scripts/auth.js"></script>
+<script src="scripts/app.js" defer></script>
+<script src="scripts/auth.js" defer></script>
 
 
 </body>

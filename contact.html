@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Us</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+/* Background */
+
+body{
+background:linear-gradient(135deg,#2ab7f8,#f9f0f8);
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* Navbar */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#667eea;
+text-align: center;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+nav ul li a:hover{
+color:#667eea;
+}
+
+/* Page Title */
+
+.title{
+text-align:center;
+color:white;
+margin-top:40px;
+}
+
+.title h1{
+font-size:40px;
+}
+
+.title p{
+margin-top:10px;
+font-size:18px;
+}
+
+/* Main Container */
+
+.contact-container{
+width:90%;
+max-width:1100px;
+margin:40px auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+/* Contact Info */
+
+.contact-info{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.info-box{
+margin-bottom:25px;
+}
+
+.info-box h3{
+color:#667eea;
+margin-bottom:5px;
+}
+
+/* Form */
+
+.contact-form{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.contact-form h2{
+margin-bottom:20px;
+color:#333;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+border-color:#667eea;
+outline:none;
+}
+
+.contact-form button{
+width:100%;
+padding:12px;
+border:none;
+background:linear-gradient(45deg,#f88810,#f7f434);
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.contact-form button:hover{
+transform:scale(1.05);
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+color:white;
+margin-top:auto;
+padding:20px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.contact-container{
+grid-template-columns:1fr;
+}
+
+header{
+flex-direction:column;
+gap:10px;
+}
+
+nav ul{
+flex-direction:column;
+align-items:center;
+}
+
+.title h1{
+font-size:30px;
+}
+
+}
+/* BACK BUTTON */
+
+.back{
+text-align:center;
+margin:40px;
+}
+
+.back a{
+text-decoration:none;
+padding:12px 30px;
+background:linear-gradient(135deg,#07a5ee,#f4cdef);
+color:white;
+border-radius:30px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.back a:hover{
+opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">ShopEasy</div>
+
+</header>
+
+<div class="title">
+<h1>Contact Us</h1>
+<p>We would love to hear from you</p>
+</div>
+
+<div class="contact-container">
+
+<div class="contact-info">
+
+<div class="info-box">
+<h3>📍 Address</h3>
+<p>Hyderabad, India</p>
+</div>
+
+<div class="info-box">
+<h3>📞 Phone</h3>
+<p>+91 9876543210</p>
+</div>
+
+<div class="info-box">
+<h3>📧 Email</h3>
+<p>support@shopeasy.com</p>
+</div>
+
+</div>
+
+<div class="contact-form">
+
+<h2>Send Message</h2>
+
+<form id="contactForm">
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Your Email" required>
+
+<input type="text" placeholder="Subject">
+
+<textarea rows="5" placeholder="Your Message"></textarea>
+
+<button type="submit">Send Message</button>
+<p id="success"></p>
+</form>
+
+</div>
+
+</div>
+<div class="back">
+<a href="index.html">⬅ Back to Home</a>
+</div>
+
+<footer>
+<p>© 2026 ShopEasy | All Rights Reserved</p>
+</footer>
+<script>
+
+document.getElementById("contactForm").addEventListener("submit", function(event){
+
+event.preventDefault();
+
+document.getElementById("success").innerText = "✅ Message sent successfully!";
+
+this.reset();
+
+});
+
+</script>
+
+</body>
+</html>

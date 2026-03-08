@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body{
+background:linear-gradient(120deg,#f6d365,#fda085);
+min-height:100vh;
+color:#333;
+}
+
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(255,255,255,0.9);
+backdrop-filter:blur(10px);
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+nav h2{
+color:#ff5f6d;
+}
+
+nav a{
+text-decoration:none;
+margin-left:20px;
+font-weight:500;
+color:#333;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#ff5f6d;
+}
+
+/* HERO SECTION */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+color:white;
+}
+
+.hero h1{
+font-size:50px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+opacity:0.9;
+}
+
+/* ABOUT SECTION */
+
+.about-container{
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+justify-content:center;
+padding:60px 8%;
+gap:40px;
+}
+
+.about-img img{
+width:320px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.about-text{
+max-width:500px;
+}
+
+.about-text h2{
+font-size:35px;
+margin-bottom:15px;
+color:#ff5f6d;
+}
+
+.about-text p{
+font-size:16px;
+line-height:1.7;
+}
+
+/* SKILLS SECTION */
+
+.skills{
+padding:60px 8%;
+text-align:center;
+}
+
+.skills h2{
+font-size:35px;
+margin-bottom:40px;
+color:#333;
+}
+
+.skills-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+}
+
+.skill-card{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.skill-card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.skill-card h3{
+color:#ff5f6d;
+margin-bottom:10px;
+}
+
+/* BACK BUTTON */
+
+.back{
+text-align:center;
+margin:40px;
+}
+
+.back a{
+text-decoration:none;
+padding:12px 30px;
+background:linear-gradient(45deg,#ff5f6d,#ffc371);
+color:white;
+border-radius:30px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.back a:hover{
+opacity:0.8;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:20px;
+background:#222;
+color:white;
+margin-top:40px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:36px;
+}
+
+.about-container{
+flex-direction:column;
+text-align:center;
+}
+
+.about-img img{
+width:250px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+<h2>Ecommerce</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>About Our Website</h1>
+<p>Learn more about our ecommerce platform and our mission</p>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about-container">
+
+<div class="about-img">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+</div>
+
+<div class="about-text">
+
+<h2>Who We Are</h2>
+
+<p>
+We are a modern ecommerce platform designed to provide the best
+online shopping experience. Our goal is to connect customers with
+high quality products at affordable prices.
+</p>
+
+<p>
+We focus on fast delivery, secure payments, and excellent
+customer service.
+</p>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+
+<section class="skills">
+
+<h2>Our Features</h2>
+
+<div class="skills-container">
+
+<div class="skill-card">
+<h3>Fast Delivery</h3>
+<p>We deliver products quickly and safely to your doorstep.</p>
+</div>
+
+<div class="skill-card">
+<h3>Secure Payments</h3>
+<p>All transactions are encrypted and protected.</p>
+</div>
+
+<div class="skill-card">
+<h3>Quality Products</h3>
+<p>We ensure high-quality products for our customers.</p>
+</div>
+
+<div class="skill-card">
+<h3>24/7 Support</h3>
+<p>Our support team is available anytime to help you.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- BACK BUTTON -->
+
+<div class="back">
+<a href="index.html">⬅ Back to Home</a>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+<p>© 2026 Ecommerce Website | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

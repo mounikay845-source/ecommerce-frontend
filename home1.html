@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ecommerce Home</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+/* Navbar */
+
+header{
+background:#111;
+color:white;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-size:16px;
+}
+
+nav ul li a:hover{
+color:#ff9800;
+}
+
+/* Search bar */
+
+.search-bar{
+padding:20px;
+text-align:center;
+background:#f4f4f4;
+}
+
+.search-bar input{
+width:60%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+/* Hero Banner */
+
+.hero{
+height:400px;
+background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+text-align:center;
+}
+
+.hero h1{
+font-size:45px;
+}
+
+/* Categories */
+
+.categories{
+padding:40px;
+text-align:center;
+}
+
+.categories h2{
+margin-bottom:30px;
+}
+
+.category-container{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.category{
+background:#fff;
+padding:20px;
+width:200px;
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.category img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:10px;
+}
+
+/* Products */
+
+.products{
+padding:40px;
+background:#f5f5f5;
+}
+
+.products h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.product-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.product{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.product img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.product h3{
+margin:10px 0;
+}
+
+.price{
+color:green;
+font-weight:bold;
+}
+
+.product button{
+margin-top:10px;
+padding:8px 20px;
+border:none;
+background:#ff9800;
+color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+.product button:hover{
+background:#e68900;
+}
+
+/* Footer */
+
+footer{
+background:#111;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+/* BACK BUTTON */
+
+.back{
+text-align:center;
+margin:40px;
+}
+
+.back a{
+text-decoration:none;
+padding:12px 30px;
+background:linear-gradient(45deg,#ff5f6d,#ffc371);
+color:white;
+border-radius:30px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.back a:hover{
+opacity:0.8;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">ShopEasy</div>
+
+
+
+</header>
+
+<div class="search-bar">
+<input type="text" placeholder="Search products...">
+</div>
+
+<section class="hero">
+<h1>Big Sale – Up To 50% Off</h1>
+</section>
+
+<section class="categories">
+
+<h2>Shop by Category</h2>
+
+<div class="category-container">
+
+<div class="category">
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
+<h3>Watches</h3>
+</div>
+
+<div class="category">
+<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
+<h3>Clothing</h3>
+</div>
+
+<div class="category">
+<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
+<h3>Laptops</h3>
+</div>
+
+<div class="category">
+<img src="assets\shoes.webp">
+<h3>Shoes</h3>
+</div>
+
+</div>
+
+</section>
+
+<section class="products">
+
+<h2>Featured Products</h2>
+
+<div class="product-container">
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
+<h3>Nike Shoes</h3>
+<p class="price">$120</p>
+<button>Add to Cart</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<h3>Smart Phone</h3>
+<p class="price">$500</p>
+<button>Add to Cart</button>
+</div>
+
+<div class="product">
+<img src="assets\headp.webp">
+<h3>Headphones</h3>
+<p class="price">$80</p>
+<button>Add to Cart</button>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
+<h3>Camera</h3>
+<p class="price">$650</p>
+<button>Add to Cart</button>
+</div>
+
+</div>
+
+</section>
+<div class="back">
+<a href="index.html">⬅ Back to Home</a>
+</div>
+
+<footer>
+
+<p>© 2026 ShopEasy | Ecommerce Website</p>
+
+</footer>
+
+</body>
+</html>
