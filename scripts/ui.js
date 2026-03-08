@@ -1,3 +1,4 @@
+(() => {
 // ================= INITIALIZE THEME =================
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const body = document.body;
@@ -66,6 +67,7 @@ document.querySelectorAll(".nav-link").forEach(link => {
         link.classList.remove("active");
     }
 });
+})();
 
 window.logout = function() {
     localStorage.removeItem("loggedInUser");
