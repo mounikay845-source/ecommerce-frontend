@@ -17,65 +17,7 @@ const sortSelect = document.getElementById("sortSelect");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
 const body = document.body;
 
-// ================= THEME INIT =================
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
-    body.classList.add("dark-theme");
-    body.classList.remove("light-theme");
-    if(themeToggleBtn) themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-}
-
-if(themeToggleBtn){
-    themeToggleBtn.addEventListener("click", () => {
-        if (body.classList.contains("dark-theme")) {
-            body.classList.remove("dark-theme");
-            body.classList.add("light-theme");
-            localStorage.setItem("theme", "light");
-            themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-        } else {
-            body.classList.add("dark-theme");
-            body.classList.remove("light-theme");
-            localStorage.setItem("theme", "dark");
-            themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        }
-    });
-}
-
-// ================= MOBILE MENU =================
-const hamburgerMenu = document.getElementById("hamburgerMenu");
-const navLinks = document.getElementById("nav-links");
-
-if (hamburgerMenu && navLinks) {
-    hamburgerMenu.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-        const icon = hamburgerMenu.querySelector("i");
-        if (navLinks.classList.contains("active")) {
-            icon.classList.remove("fa-bars");
-            icon.classList.add("fa-times");
-        } else {
-            icon.classList.remove("fa-times");
-            icon.classList.add("fa-bars");
-        }
-    });
-}
-
-// ================= AUTH UI UPDATE =================
-const authActions = document.getElementById("authActions");
-if (user) {
-    if(authActions) {
-        authActions.innerHTML = `
-            <button onclick="logout()" class="logout-btn">Logout</button>
-        `;
-    }
-}
-
-function logout() {
-    localStorage.removeItem("loggedInUser");
-    showToast("Logged out successfully!", "success");
-    setTimeout(() => {
-        window.location.reload();
-    }, 1000);
-}
+// Removed redundant auth, theme, and hamburger logic from app.js (moved to ui.js)
 
 // ================= UPDATE COUNTERS =================
 function updateCounters() {

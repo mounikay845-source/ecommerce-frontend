@@ -21,6 +21,7 @@
             margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -156,15 +157,50 @@
 <!-- HEADER -->
 <header id="main-header">
     <div class="logo" onclick="window.location.href='index.html'">MyShop</div>
+
     <nav id="navbar">
-        <ul class="nav-links">
+        <ul class="nav-links" id="nav-links">
             <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#products" class="nav-link">Products</a></li>
             <li><a href="about.html" class="nav-link">About</a></li>
-            <li><a href="contact.html" class="nav-link active" style="color: var(--primary-color);">Contact</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
     </nav>
+
     <div class="header-actions">
-        <a href="index.html" class="auth-btn" style="text-decoration: none; padding: 0.6rem 1.2rem;">Shop Now</a>
+        <!-- Search -->
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fa fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="wishlist.html" class="icon-badge-container">
+            <i class="fa-regular fa-heart"></i>
+            <span class="badge-count" id="wishlistCount">0</span>
+        </a>
+       
+        <!-- Cart -->
+        <a href="cart.html" class="icon-badge-container">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="badge-count" id="cartCount">0</span>
+        </a>
+
+        <!-- Auth Buttons -->
+        <div id="authActions">
+            <a href="login.html" class="login-btn" style="text-decoration: none; font-size: 0.9rem;" id="loginBtn"><i class="fa-solid fa-user"></i> Login</a>
+        </div>
+
+        <div class="hamburger" id="hamburgerMenu">
+            <i class="fa fa-bars"></i>
+        </div>
     </div>
 </header>
 
@@ -230,14 +266,8 @@
     </div>
 </main>
 
+<script src="scripts/ui.js" defer></script>
 <script>
-    // Apply theme on load if exists
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-        document.body.classList.add("dark-theme");
-        document.body.classList.remove("light-theme");
-    }
-
     function handleContact(e) {
         e.preventDefault();
         // Client-side simulation
