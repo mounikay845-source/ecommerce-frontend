@@ -1,25 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Forgot Password</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <title>Forgot Password | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
 
-<body>
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            background: radial-gradient(circle at center, var(--accent-color), var(--bg-color) 60%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: var(--surface-color);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--surface-border);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        h2 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        p.desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            background: white;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .auth-links {
+            margin-top: 1.5rem;
+        }
+
+        .auth-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-fast);
+        }
+
+        .auth-links a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        #resetMessage {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: var(--success-color);
+            color: white;
+            font-weight: 500;
+            animation: fadeUp 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body class="light-theme">
 
 <div class="auth-container">
+    <div class="avatar"><i class="fa-solid fa-key"></i></div>
+    <h2>Forgot Password?</h2>
+    <p class="desc">No worries, we'll send you reset instructions.</p>
+    
+    <form id="forgotForm" onsubmit="sendResetLink(event)">
+        <div class="input-group">
+            <i class="fa fa-envelope"></i>
+            <input type="email" id="resetEmail" placeholder="Enter your email" required>
+        </div>
 
-<h2>Reset Password</h2>
+        <button type="submit" class="auth-btn">Generate Reset Link <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+    </form>
+    
+    <div id="resetMessage"></div>
 
-<input type="email" id="resetEmail" placeholder="Enter your email">
-
-<button type='button' onclick="sendResetLink()">Generate Reset Link</button>
-
-<p id="resetMessage"></p>
-
+    <div class="auth-links">
+        <a href="login.html"><i class="fa-solid fa-arrow-left"></i> Back to Login</a>
+    </div>
 </div>
 
-<script src="scripts/forgot.js"></script>
+<script>
+    // Apply theme on load if exists
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
+    }
+
+    // Mock functionality previously in scripts/forgot.js
+    function sendResetLink(e) {
+        e.preventDefault();
+        const email = document.getElementById("resetEmail").value;
+        const msgBox = document.getElementById("resetMessage");
+        const form = document.getElementById("forgotForm");
+
+        if(email) {
+            form.style.display = 'none';
+            msgBox.innerHTML = '<i class="fa-solid fa-check-circle"></i> Password reset link sent to <strong>' + email + '</strong>.<br><br><a href="reset.html" style="color:white; text-decoration:underline;">Click here to simulate resetting</a>';
+            msgBox.style.display = 'block';
+        }
+    }
+</script>
 
 </body>
 </html>

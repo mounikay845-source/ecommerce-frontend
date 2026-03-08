@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://fakestoreapi.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://fakestoreapi.com https://identitytoolkit.googleapis.com;">
+
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .page-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 4%;
+            min-height: 60vh;
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body class="light-theme">
+
+<!-- HEADER -->
+<header id="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">MyShop</div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#products" class="nav-link">Products</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <a href="wishlist.html" class="icon-badge-container" style="color: var(--danger-color);"><i class="fa-solid fa-heart"></i><span class="badge-count" id="wishlistCount">0</span></a>
+        <a href="cart.html" class="icon-badge-container"><i class="fa-solid fa-bag-shopping"></i><span class="badge-count" id="cartCount">0</span></a>
+    </div>
+</header>
+
+<div class="page-container">
+    <h2 class="section-title">Your Wishlist</h2>
+    
+    <div class="wishlist-grid" id="wishlist-items">
+        <!-- Rendered via cart.js using product-card styles from main.css -->
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script src="scripts/cart.js" defer></script>
+</body>
+</html>

@@ -1,298 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Ecommerce Home</title>
+    <meta charset="UTF-8">
+    <title>Campaigns | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://images.unsplash.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
 
-<style>
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .campaign-hero {
+            position: relative;
+            min-height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=2000&auto=format&fit=crop') center/cover;
+            padding: 2rem 4%;
+            margin-bottom: 4rem;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
+        .campaign-hero h1 {
+            color: white;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            animation: fadeUp 0.8s ease-out forwards;
+        }
 
-/* Navbar */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 0 4%;
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+        }
 
-header{
-background:#111;
-color:white;
-padding:15px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+        .promo-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-border);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+            position: relative;
+        }
 
-.logo{
-font-size:24px;
-font-weight:bold;
-}
+        .promo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
 
-nav ul{
-display:flex;
-list-style:none;
-gap:25px;
-}
+        .promo-img {
+            height: 250px;
+            width: 100%;
+        }
 
-nav ul li a{
-text-decoration:none;
-color:white;
-font-size:16px;
-}
+        .promo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-bounce);
+        }
+        
+        .promo-card:hover .promo-img img {
+            transform: scale(1.05);
+        }
 
-nav ul li a:hover{
-color:#ff9800;
-}
+        .promo-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
 
-/* Search bar */
+        .promo-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-.search-bar{
-padding:20px;
-text-align:center;
-background:#f4f4f4;
-}
-
-.search-bar input{
-width:60%;
-padding:10px;
-border:1px solid #ccc;
-border-radius:5px;
-}
-
-/* Hero Banner */
-
-.hero{
-height:400px;
-background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da");
-background-size:cover;
-background-position:center;
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-text-align:center;
-}
-
-.hero h1{
-font-size:45px;
-}
-
-/* Categories */
-
-.categories{
-padding:40px;
-text-align:center;
-}
-
-.categories h2{
-margin-bottom:30px;
-}
-
-.category-container{
-display:flex;
-justify-content:center;
-gap:30px;
-flex-wrap:wrap;
-}
-
-.category{
-background:#fff;
-padding:20px;
-width:200px;
-border-radius:10px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-}
-
-.category img{
-width:100%;
-height:120px;
-object-fit:cover;
-border-radius:10px;
-}
-
-/* Products */
-
-.products{
-padding:40px;
-background:#f5f5f5;
-}
-
-.products h2{
-text-align:center;
-margin-bottom:30px;
-}
-
-.product-container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.product{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-.product img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.product h3{
-margin:10px 0;
-}
-
-.price{
-color:green;
-font-weight:bold;
-}
-
-.product button{
-margin-top:10px;
-padding:8px 20px;
-border:none;
-background:#ff9800;
-color:white;
-cursor:pointer;
-border-radius:5px;
-}
-
-.product button:hover{
-background:#e68900;
-}
-
-/* Footer */
-
-footer{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-/* BACK BUTTON */
-
-.back{
-text-align:center;
-margin:40px;
-}
-
-.back a{
-text-decoration:none;
-padding:12px 30px;
-background:linear-gradient(45deg,#ff5f6d,#ffc371);
-color:white;
-border-radius:30px;
-font-weight:bold;
-transition:0.3s;
-}
-
-.back a:hover{
-opacity:0.8;
-}
-</style>
-
+        .promo-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+        }
+    </style>
 </head>
+<body class="light-theme">
 
-<body>
-
-<header>
-
-<div class="logo">ShopEasy</div>
-
-
-
+<!-- HEADER -->
+<header id="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">MyShop</div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#products" class="nav-link">Products</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <!-- Reusing theme toggle logic if needed, or static links for About page to keep simple -->
+        <a href="index.html" class="auth-btn" style="text-decoration: none; padding: 0.6rem 1.2rem;">Shop Sale</a>
+    </div>
 </header>
 
-<div class="search-bar">
-<input type="text" placeholder="Search products...">
-</div>
+<main>
+    <div class="campaign-hero">
+        <h1>Flash Sale Active</h1>
+    </div>
 
-<section class="hero">
-<h1>Big Sale – Up To 50% Off</h1>
-</section>
+    <h2 class="section-title">Curated Collections</h2>
 
-<section class="categories">
+    <div class="features-grid">
+        <div class="promo-card">
+            <div class="promo-badge">-40%</div>
+            <div class="promo-img">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=600&auto=format&fit=crop" loading="lazy">
+            </div>
+            <div class="promo-content">
+                <h3>Footwear Collection</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Premium sneakers ending soon.</p>
+                <a href="index.html" class="auth-btn" style="display:inline-block; text-decoration:none; width: auto; padding: 0.6rem 2rem;">Shop Now</a>
+            </div>
+        </div>
 
-<h2>Shop by Category</h2>
+        <div class="promo-card">
+             <div class="promo-badge">Trending</div>
+            <div class="promo-img">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600&auto=format&fit=crop" loading="lazy">
+            </div>
+            <div class="promo-content">
+                <h3>Luxury Watches</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Timeless pieces for every occasion.</p>
+                <a href="index.html" class="auth-btn" style="display:inline-block; text-decoration:none; width: auto; padding: 0.6rem 2rem;">Shop Now</a>
+            </div>
+        </div>
 
-<div class="category-container">
+        <div class="promo-card">
+             <div class="promo-badge">-25%</div>
+            <div class="promo-img">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=600&auto=format&fit=crop" loading="lazy">
+            </div>
+            <div class="promo-content">
+                <h3>Electronics Hub</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Upgrade your tech arsenal today.</p>
+                <a href="index.html" class="auth-btn" style="display:inline-block; text-decoration:none; width: auto; padding: 0.6rem 2rem;">Shop Now</a>
+            </div>
+        </div>
+    </div>
+</main>
 
-<div class="category">
-<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
-<h3>Watches</h3>
-</div>
-
-<div class="category">
-<img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f">
-<h3>Clothing</h3>
-</div>
-
-<div class="category">
-<img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8">
-<h3>Laptops</h3>
-</div>
-
-<div class="category">
-<img src="assets\shoes.webp">
-<h3>Shoes</h3>
-</div>
-
-</div>
-
-</section>
-
-<section class="products">
-
-<h2>Featured Products</h2>
-
-<div class="product-container">
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff">
-<h3>Nike Shoes</h3>
-<p class="price">$120</p>
-<button>Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3>Smart Phone</h3>
-<p class="price">$500</p>
-<button>Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="assets\headp.webp">
-<h3>Headphones</h3>
-<p class="price">$80</p>
-<button>Add to Cart</button>
-</div>
-
-<div class="product">
-<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f">
-<h3>Camera</h3>
-<p class="price">$650</p>
-<button>Add to Cart</button>
-</div>
-
-</div>
-
-</section>
-<div class="back">
-<a href="index.html">⬅ Back to Home</a>
-</div>
-
-<footer>
-
-<p>© 2026 ShopEasy | Ecommerce Website</p>
-
+<footer style="background: var(--surface-color); padding: 2rem 4%; text-align: center; border-top: 1px solid var(--surface-border); margin-top: 4rem;">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 MyShop Premium E-Commerce. All rights reserved.</p>
 </footer>
 
+<script>
+    // Apply theme on load if exists
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
+    }
+</script>
 </body>
 </html>

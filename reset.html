@@ -1,20 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Reset Password</title>
+    <meta charset="UTF-8">
+    <title>Reset Password | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            background: radial-gradient(circle at center, var(--success-color), var(--bg-color) 60%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: var(--surface-color);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--surface-border);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--success-color), #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        h2 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        p.desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .input-group input:focus {
+            border-color: var(--success-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+            background: white;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--success-color), #3b82f6);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        #globalAuthError {
+            display: none;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        #globalAuthSuccess {
+            display: none;
+            background: var(--success-color);
+            color: white;
+            padding: 0.8rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
+<body class="light-theme">
 
-<body>
+<div class="auth-container">
+    <div class="avatar"><i class="fa-solid fa-unlock-keyhole"></i></div>
+    <h2>Create New Password</h2>
+    <p class="desc">Your new password must be different from previous used passwords.</p>
+    
+    <div id="globalAuthError"></div>
+    <div id="globalAuthSuccess"></div>
+    
+    <form id="resetForm" onsubmit="handleResetPassword(event)">
+        <div class="input-group">
+            <i class="fa fa-envelope"></i>
+            <input type="email" id="email" placeholder="Confirm your email" required>
+        </div>
+        <div class="input-group" style="margin-bottom: 0.5rem;">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="newPassword" placeholder="New Password" required>
+        </div>
+        <div style="text-align: left; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; margin-left: 1rem;">
+            * Password must be ≥ 8 chars, 1 uppercase, 1 number
+        </div>
 
-<h2>Reset Password</h2>
+        <button type="submit" class="auth-btn">Reset Password</button>
+    </form>
+</div>
 
-<input type="email" id="email" placeholder="Enter your email">
+<script>
+    // Apply theme on load if exists
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
+    }
 
-<input type="password" id="newPassword" placeholder="Enter new password">
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-<button onclick="resetPassword()">Reset Password</button>
+    // Updated functionality for reset.js logic matching the new security rules
+    function handleResetPassword(e) {
+        e.preventDefault();
+        const email = document.getElementById("email").value;
+        const newPassword = document.getElementById("newPassword").value;
+        const errBox = document.getElementById("globalAuthError");
+        const sucBox = document.getElementById("globalAuthSuccess");
+        
+        errBox.style.display = 'none';
+        sucBox.style.display = 'none';
 
-<script src="scripts/reset.js"></script>
+        if (!passwordRegex.test(newPassword)) {
+            errBox.textContent = "Password must be at least 8 characters long, contain 1 uppercase letter and 1 number.";
+            errBox.style.display = 'block';
+            return;
+        }
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let userIndex = users.findIndex(u => u.email === email);
+        
+        if(userIndex > -1){
+            users[userIndex].password = newPassword;
+            localStorage.setItem("users", JSON.stringify(users));
+            
+            document.getElementById("resetForm").style.display = 'none';
+            sucBox.innerHTML = 'Password reset successfully!<br>Redirecting to login...';
+            sucBox.style.display = 'block';
+            
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+        } else {
+            errBox.textContent = "No account found with that email.";
+            errBox.style.display = 'block';
+        }
+    }
+</script>
 
 </body>
 </html>

@@ -1,282 +1,255 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Contact Us</title>
+    <meta charset="UTF-8">
+    <title>Contact Us | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
 
-<style>
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .contact-hero {
+            text-align: center;
+            padding: 5rem 4% 3rem 4%;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+        .contact-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-/* Background */
+        .contact-wrapper {
+            max-width: 1000px;
+            margin: 0 auto 5rem auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            padding: 0 4%;
+        }
 
-body{
-background:linear-gradient(135deg,#2ab7f8,#f9f0f8);
-min-height:100vh;
-display:flex;
-flex-direction:column;
-}
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
 
-/* Navbar */
+        .contact-info-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-colored);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:white;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
 
-.logo{
-font-size:24px;
-font-weight:bold;
-color:#667eea;
-text-align: center;
-}
+        .info-row i {
+            font-size: 1.5rem;
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 50%;
+        }
 
-nav ul{
-display:flex;
-list-style:none;
-gap:25px;
-}
+        .info-row h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        .info-row p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
 
-nav ul li a{
-text-decoration:none;
-color:#333;
-font-weight:500;
-}
+        .contact-form {
+            background: var(--surface-color);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-border);
+            box-shadow: var(--shadow-md);
+        }
 
-nav ul li a:hover{
-color:#667eea;
-}
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
 
-/* Page Title */
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
 
-.title{
-text-align:center;
-color:white;
-margin-top:40px;
-}
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.5);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
 
-.title h1{
-font-size:40px;
-}
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: white;
+        }
 
-.title p{
-margin-top:10px;
-font-size:18px;
-}
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
 
-/* Main Container */
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+            width: 100%;
+        }
 
-.contact-container{
-width:90%;
-max-width:1100px;
-margin:40px auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-}
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-colored);
+        }
 
-/* Contact Info */
-
-.contact-info{
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-.info-box{
-margin-bottom:25px;
-}
-
-.info-box h3{
-color:#667eea;
-margin-bottom:5px;
-}
-
-/* Form */
-
-.contact-form{
-background:white;
-padding:30px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-.contact-form h2{
-margin-bottom:20px;
-color:#333;
-}
-
-.contact-form input,
-.contact-form textarea{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border:1px solid #ccc;
-border-radius:6px;
-font-size:14px;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus{
-border-color:#667eea;
-outline:none;
-}
-
-.contact-form button{
-width:100%;
-padding:12px;
-border:none;
-background:linear-gradient(45deg,#f88810,#f7f434);
-color:white;
-font-size:16px;
-border-radius:6px;
-cursor:pointer;
-transition:0.3s;
-}
-
-.contact-form button:hover{
-transform:scale(1.05);
-}
-
-/* Footer */
-
-footer{
-text-align:center;
-color:white;
-margin-top:auto;
-padding:20px;
-}
-
-/* Responsive */
-
-@media(max-width:768px){
-
-.contact-container{
-grid-template-columns:1fr;
-}
-
-header{
-flex-direction:column;
-gap:10px;
-}
-
-nav ul{
-flex-direction:column;
-align-items:center;
-}
-
-.title h1{
-font-size:30px;
-}
-
-}
-/* BACK BUTTON */
-
-.back{
-text-align:center;
-margin:40px;
-}
-
-.back a{
-text-decoration:none;
-padding:12px 30px;
-background:linear-gradient(135deg,#07a5ee,#f4cdef);
-color:white;
-border-radius:30px;
-font-weight:bold;
-transition:0.3s;
-}
-
-.back a:hover{
-opacity:0.8;
-}
-</style>
+        #form-success {
+            display: none;
+            background: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            animation: fadeUp 0.4s ease forwards;
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
+<body class="light-theme">
 
-<body>
-
-<header>
-
-<div class="logo">ShopEasy</div>
-
+<!-- HEADER -->
+<header id="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">MyShop</div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link active" style="color: var(--primary-color);">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <a href="index.html" class="auth-btn" style="text-decoration: none; padding: 0.6rem 1.2rem;">Shop Now</a>
+    </div>
 </header>
 
-<div class="title">
-<h1>Contact Us</h1>
-<p>We would love to hear from you</p>
-</div>
+<main>
+    <div class="contact-hero">
+        <h1>Let's Connect</h1>
+        <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 500px; margin: 0 auto;">Have a question about an order, or just want to say hello? Drop us a message below.</p>
+    </div>
 
-<div class="contact-container">
+    <div class="contact-wrapper">
+        <!-- Info Panel -->
+        <div class="contact-info-card">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Contact Information</h3>
+            <p style="opacity: 0.9; margin-bottom: 2rem;">Fill up the form and our Team will get back to you within 24 hours.</p>
 
-<div class="contact-info">
+            <div class="info-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <h4>Headquarters</h4>
+                    <p>Hyderabad, India<br>Tech Hub Space, 5th Floor</p>
+                </div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <h4>Phone Line</h4>
+                    <p>+91 9876543210</p>
+                </div>
+            </div>
+            <div class="info-row">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <h4>Email Support</h4>
+                    <p>support@myshop.com</p>
+                </div>
+            </div>
+        </div>
 
-<div class="info-box">
-<h3>📍 Address</h3>
-<p>Hyderabad, India</p>
-</div>
+        <!-- Form Panel -->
+        <div class="contact-form">
+            <div id="form-success"><i class="fa-solid fa-check-circle"></i> Message sent successfully!</div>
+            
+            <form id="contactForm" onsubmit="handleContact(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" class="form-control" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" class="form-control" placeholder="Order Inquiry" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message <i class="fa-solid fa-paper-plane" style="margin-left: 8px;"></i></button>
+            </form>
+        </div>
+    </div>
+</main>
 
-<div class="info-box">
-<h3>📞 Phone</h3>
-<p>+91 9876543210</p>
-</div>
-
-<div class="info-box">
-<h3>📧 Email</h3>
-<p>support@shopeasy.com</p>
-</div>
-
-</div>
-
-<div class="contact-form">
-
-<h2>Send Message</h2>
-
-<form id="contactForm">
-
-<input type="text" placeholder="Your Name" required>
-
-<input type="email" placeholder="Your Email" required>
-
-<input type="text" placeholder="Subject">
-
-<textarea rows="5" placeholder="Your Message"></textarea>
-
-<button type="submit">Send Message</button>
-<p id="success"></p>
-</form>
-
-</div>
-
-</div>
-<div class="back">
-<a href="index.html">⬅ Back to Home</a>
-</div>
-
-<footer>
-<p>© 2026 ShopEasy | All Rights Reserved</p>
-</footer>
 <script>
+    // Apply theme on load if exists
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.body.classList.remove("light-theme");
+    }
 
-document.getElementById("contactForm").addEventListener("submit", function(event){
+    function handleContact(e) {
+        e.preventDefault();
+        // Client-side simulation
+        const btn = document.querySelector('.submit-btn');
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+        btn.style.opacity = '0.8';
 
-event.preventDefault();
-
-document.getElementById("success").innerText = "✅ Message sent successfully!";
-
-this.reset();
-
-});
-
+        setTimeout(() => {
+            document.getElementById("contactForm").style.display = 'none';
+            document.getElementById("form-success").style.display = 'block';
+        }, 1000);
+    }
 </script>
-
 </body>
 </html>

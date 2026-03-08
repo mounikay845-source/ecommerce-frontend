@@ -1,212 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login</title>
-<style>
-        .body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #f4f8f7 0%, #aa52aa 100%);
-            height: 100vh;
+    <meta charset="UTF-8">
+    <title>Login | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://fakestoreapi.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;">
+    
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            background: radial-gradient(circle at bottom right, var(--primary-color), var(--bg-color) 40%);
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
         }
 
-        .container {
-            background: rgb(242, 240, 239);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            width: 350px;
+        .auth-container {
+            background: var(--surface-color);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--surface-border);
+            padding: 2.5rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: var(--shadow-md);
         }
 
         h2 {
-            margin-bottom: 20px;
-            color: #333;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            font-weight: 700;
         }
 
-        input {
+        .input-group {
+            position: relative;
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-group input {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-color);
+            font-size: 1rem;
+            font-family: var(--font-main);
             outline: none;
-            transition: 0.3s;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
         }
 
-        input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 5px rgba(102,126,234,0.5);
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: white;
         }
 
-        button {
+        .auth-btn {
             width: 100%;
-            padding: 10px;
-            margin-top: 15px;
+            padding: 0.8rem;
             border: none;
-            background: #667eea;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            font-size: 16px;
-            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+            margin-top: 1rem;
         }
 
-        button:hover {
-            background: #5a67d8;
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.4);
         }
 
-        .forgot-link {
-            display: block;
-            margin-top: 12px;
-            font-size: 14px;
+        .auth-links {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        .forgot-link a {
+        .auth-links a {
+            color: var(--primary-color);
             text-decoration: none;
-            color: #667eea;
-            font-weight: bold;
+            font-weight: 600;
+            transition: color var(--transition-fast);
         }
 
-        .forgot-link a:hover {
-            text-decoration: underline;
+        .auth-links a:hover {
+            color: var(--secondary-color);
         }
 
-        .register-link {
-            margin-top: 15px;
-            font-size: 14px;
+        .error-msg {
+            color: var(--danger-color);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+            margin-left: 1rem;
         }
-
-        .register-link a {
-            text-decoration: none;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-        body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: hsl(307, 45%, 89%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Main Box */
-.login-box {
-    width: 350px;
-    background: #56657a;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    color: white;
-}
-
-/* Top Avatar */
-.avatar {
-    width: 70px;
-    height: 70px;
-    background: #a3b3d1;
-    border-radius: 50%;
-    margin-top:50px;
-    margin: -30px auto 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-}
-
-/* Input Fields */
-.input-box {
-    position: relative;
-    margin: 20px 0;
-}
-
-.input-box i {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #aa4e4e;
-}
-
-.input-box input {
-    width: 85%;
-    padding: 12px 12px 12px 40px;
-    border: none;
-    border-radius: 25px;
-    outline: none;
-    background: #bbc4d8;
-    color: white;
-}
-
-/* Button */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(to right, #69b2c1, #00f2fe);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-.forgot {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #ccc;
-}
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-</head>
-
-<body class="body">
-
-<div class="container">
-    <div class="avatar">
-           <i class="fa fa-user"></i>
-        </div>
-          <h2>Login</h2>
-    <form id="loginForm">
         
-        <div class="input-box">
+        #globalAuthError {
+            color: white;
+            background: var(--danger-color);
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+    </style>
+</head>
+<body class="light-theme">
+
+<div class="auth-container">
+    <div class="avatar"><i class="fa fa-user"></i></div>
+    <h2>Welcome Back</h2>
+    
+    <div id="globalAuthError"></div>
+
+    <form id="loginForm" onsubmit="loginUser(event)">
+        <div class="input-group">
             <i class="fa fa-envelope"></i>
-            <input type="email" id="email" placeholder="Enter Email..." required>
+            <input type="email" id="email" placeholder="Email Address" required>
         </div>
-
-        <div class="input-box">
+        <div class="input-group">
             <i class="fa fa-lock"></i>
-            <input type="password" id="password" placeholder="Password..." required>
+            <input type="password" id="password" placeholder="Password" required>
         </div>
 
-        <button type="button" onclick="login()">Login</button>
-
+        <button type="submit" class="auth-btn">Sign In</button>
     </form>
-    <div class="forgot-link"> 
-        <a href="forgot.html">Forgot Password?</a>
-     </div> 
-    <div class="register-link"> 
-        Don't have an account? <a href="signup.html">Signup</a> 
+
+    <div class="auth-links">
+        <p style="margin-bottom: 0.5rem;"><a href="forgot.html">Forgot Password?</a></p>
+        <p>Don't have an account? <a href="signup.html">Create Account</a></p>
     </div>
+</div>
 
 <script src="scripts/auth.js"></script>
-
 </body>
 </html>

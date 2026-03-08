@@ -1,32 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Cart</title>
-<link rel="stylesheet" href="style/cart.css">
+    <meta charset="UTF-8">
+    <title>Shopping Cart | MyShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://fakestoreapi.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://fakestoreapi.com https://identitytoolkit.googleapis.com;">
+
+    <link rel="stylesheet" href="style/variables.css">
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .page-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 4%;
+            min-height: 60vh;
+        }
+        
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cart-items-container {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+        
+        .cart-item-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            background: var(--surface-color);
+        }
+
+        .quantity-control button {
+            background: transparent;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            color: var(--text-color);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .quantity-control button:hover { background: rgba(0,0,0,0.05); }
+
+        .quantity-control span {
+            padding: 0 0.5rem;
+            font-weight: 600;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--danger-color);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform var(--transition-bounce);
+        }
+        .remove-btn:hover { transform: scale(1.1); }
+
+        .summary-card {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .summary-total {
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-top: 2px dashed var(--surface-border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-colored);
+            transition: transform var(--transition-bounce);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
+<body class="light-theme">
 
-<body>
+<!-- HEADER -->
+<header id="main-header">
+    <div class="logo" onclick="window.location.href='index.html'">MyShop</div>
+    <nav id="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#products" class="nav-link">Products</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+        </ul>
+    </nav>
+    <div class="header-actions">
+        <a href="wishlist.html" class="icon-badge-container"><i class="fa-regular fa-heart"></i><span class="badge-count" id="wishlistCount">0</span></a>
+        <a href="cart.html" class="icon-badge-container" style="color: var(--primary-color);"><i class="fa-solid fa-bag-shopping"></i><span class="badge-count" id="cartCount">0</span></a>
+    </div>
+</header>
 
-<div class="cart-container">
+<div class="page-container">
+    <h2 class="section-title">Your Cart</h2>
+    
+    <div class="cart-layout">
+        <!-- Cart Items -->
+        <div class="cart-items-container" id="cart-items">
+            <!-- Rendered via JS -->
+        </div>
 
-<h1>Your Shopping Cart</h1>
-
-<div id="cart-items"></div>
-
-<div class="cart-summary">
-<h3>Total: $<span id="total">0</span></h3>
-
-<button class="checkout">Proceed to Checkout</button>
-<a href="index.html" class="continue">Continue Shopping</a>
+        <!-- Summary -->
+        <div class="summary-card">
+            <h3 style="margin-bottom: 1.5rem;">Order Summary</h3>
+            <div class="summary-row summary-total">
+                <span>Total</span>
+                <span>$<span id="cart-total">0.00</span></span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout <i class="fa-solid fa-arrow-right"></i></button>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-</div>
-
-
-
-<script src="scripts/cart.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
+<script src="scripts/cart.js" defer></script>
 </body>
 </html>

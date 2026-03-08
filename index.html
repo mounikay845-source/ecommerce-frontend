@@ -2,168 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>E-Commerce Website</title>
+    <title>MyShop | Premium E-Commerce</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- Content Security Policy to prevent XSS. Allows images, styles, and scripts from specific trusted sources like fontawesome, fakestoreapi -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://fakestoreapi.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://fakestoreapi.com https://identitytoolkit.googleapis.com;">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style/variables.css">
     <link rel="stylesheet" href="style/main.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
 </head>
+<body class="light-theme">
 
-<body>
+<!-- ================= TOAST CONTAINER ================= -->
+<div id="toast-container"></div>
 
 <!-- ================= HEADER ================= -->
-<header>
-    <div class="logo">MyShop</div>
+<header id="main-header">
+    <div class="logo" onclick="window.scrollTo(0, 0)">MyShop</div>
 
- <nav id="navbar">
-<ul class="nav-links">
+    <nav id="navbar">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="#products" class="nav-link">Products</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
 
-<li><a href="home1.html" class="nav-link">Home</a></li>
-<li><a href="about.html" class="nav-link">About</a></li>
-<li><a href="contact.html" class="nav-link">Contact</a></li>
-<li><a href="#products">Products</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="signup.html">Signup</a></li>
+    <div class="header-actions">
+        <!-- Search -->
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fa fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+        </div>
 
-</ul>
-</nav>
-    <button onclick="logout()" class="logout-btn">Logout</button>
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark Mode">
+            <i class="fa-solid fa-moon"></i>
+        </button>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search products...">
+        <!-- Wishlist -->
+        <a href="wishlist.html" class="icon-badge-container">
+            <i class="fa-regular fa-heart"></i>
+            <span class="badge-count" id="wishlistCount">0</span>
+        </a>
+       
+        <!-- Cart -->
+        <a href="cart.html" class="icon-badge-container">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="badge-count" id="cartCount">0</span>
+        </a>
+
+        <!-- Auth Buttons -->
+        <div id="authActions">
+            <a href="login.html" class="logout-btn" style="text-decoration: none; font-size: 0.9rem;" id="loginBtn">Login</a>
+        </div>
+
+        <div class="hamburger" id="hamburgerMenu">
+            <i class="fa fa-bars"></i>
+        </div>
     </div>
-
-    <div class="wishlist-icon">
-        <i class="fa fa-heart"></i>
-        <span id="wishlistCount">0</span>
-    </div>
-   
-    <a href="cart.html" class="cart">
-    <img src="assets/cart1.webp" alt="Cart" class="cart-img" >
-    <span id="cartCount">0</span>
-</a>
-<div class="hamburger" onclick="toggleMenu()">
-<i class="fa fa-bars"></i>
-</div>
 </header>
 
-<!-- ================= HERO SECTION ================= -->
-<section class="hero">
-    <picture>
-        <source media="(min-width: 1024px)" srcset="assets\big.avif" type="image/avif">
-        <source media="(min-width: 600px)" srcset="assets\big.avif" type="image/avif">
-        <img src="assets\big.avif" alt="Biggest Sale" loading="lazy"class="hero-bg-img" loading="eager">
-    </picture>
-    <div class="hero-content">
-        <h1>Biggest Sale of the Year!</h1>
-        <p>Up to 70% off on selected products. Shop now before it ends!</p>
-        <a href="#products" class="hero-btn">Shop Now</a>
-    </div>
-</section>
+<main>
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Style.</h1>
+            <p>Discover the latest trends with up to 70% off. Exceptional quality, exclusively curated for you.</p>
+            <a href="#products" class="hero-btn">Shop Collection <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+        </div>
+    </section>
 
-<!-- ================= CATEGORY SECTION ================= -->
-<section class="category-icons-section">
-    <div class="category-icons">
+    <!-- ================= CATEGORY SECTION ================= -->
+    <section class="category-section">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-icons">
+            <div class="category-item" onclick="filterCategory('men\'s clothing')">
+                <div class="category-img-wrapper">
+                    <img src="assets/men.webp" alt="Menswear" loading="lazy" onerror="this.src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg'">
+                </div>
+                <p>Menswear</p>
+            </div>
+            
+            <div class="category-item" onclick="filterCategory('women\'s clothing')">
+                <div class="category-img-wrapper">
+                    <img src="assets/ethnic.webp" alt="Womenswear" loading="lazy">
+                </div>
+                <p>Womenswear</p>
+            </div>
 
-        <div class="category-item" onclick="filterCategory('women\'s clothing')">
-    <img src="assets/ethnic.webp" alt="Ethnic Wear" loading="lazy" decoding="async">
-    <p>Ethnic Wear</p>
-</div>
+            <div class="category-item" onclick="filterCategory('electronics')">
+                <div class="category-img-wrapper">
+                    <img src="assets/elec.webp" alt="Electronics" loading="lazy">
+                </div>
+                <p>Electronics</p>
+            </div>
+             
+            <div class="category-item" onclick="filterCategory('jewelery')">
+                <div class="category-img-wrapper">
+                    <img src="assets/jewellery.webp" alt="Jewelry" loading="lazy">
+                </div>
+                <p>Jewelry</p>
+            </div>
 
-        
-        <div class="category-item" onclick="filterCategory('women\'s clothing')">
-    <img src="assets/men.webp" alt="Ethnic Wear" loading="lazy" decoding="async">
-     <p>Menswear</p>
-</div>
+            <div class="category-item" onclick="filterCategory('allProducts')">
+                <div class="category-img-wrapper">
+                    <i class="fa-solid fa-border-all" style="font-size: 2rem; color: var(--primary-color);"></i>
+                </div>
+                <p>All Products</p>
+            </div>
+        </div>
+    </section>
 
-        <div class="category-item" onclick="filterCategory('electronics')">
-    <img src="assets\elec.webp" alt="Electronics" loading="lazy" decoding="async">
-     <p>Electronics</p>
-</div>
-         
-        <div class="category-item" onclick="filterCategory('jewelery')">
-    <img src="assets/jewellery.webp" alt="jewellery" loading="lazy" decoding="async">
-      <p>Jewelry</p>
-</div>
+    <!-- ================= PRODUCTS SECTION ================= -->
+    <section class="products-section" id="products">
+        <div class="products-header">
+            <h2 class="section-title" style="margin-bottom: 0; left: 0; transform: none;">Trending Now</h2>
+            
+            <div class="filter-group">
+                <select id="sortSelect" class="filter-select">
+                    <option value="default">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
 
-        
-        <div class="category-item" onclick="filterCategory('allProducts')">
-    <img src="assets/all.webp" alt="all products" loading="lazy" decoding="async">
-    <p>All Products</p>
-</div>
+        <div id="productGrid" class="product-grid">
+            <!-- Skeleton Loading will be injected here via app.js -->
+        </div>
 
-    </div>
-</section>
+        <div id="errorMessage" style="display:none; text-align:center; color: var(--danger-color); font-weight: 600; padding: 2rem;"></div>
+    </section>
+</main>
 
-<!-- ================= PRODUCTS SECTION ================= -->
-<section class="products-section" id="products">
-    <h2>Our Products</h2>
+<footer style="background: var(--surface-color); padding: 2rem 4%; text-align: center; border-top: 1px solid var(--surface-border); margin-top: 4rem;">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 MyShop Premium E-Commerce. All rights reserved.</p>
+</footer>
 
-    <div id="loading">Loading products...</div>
-    <div id="errorMessage"></div>
-
-    <div id="productGrid" class="product-grid"></div>
-</section>
-
-<!-- ===== Add To Cart Popup ===== -->
-<div id="cartPopup" class="popup"></div>
-<script>
-
-function toggleMenu(){
-
-const nav=document.getElementById("navbar");
-
-nav.classList.toggle("show");
-
-}
-
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-const lazyImages = document.querySelectorAll("img[loading='lazy']");
-
-if("IntersectionObserver" in window){
-
-let observer = new IntersectionObserver(function(entries, observer){
-
-entries.forEach(function(entry){
-
-if(entry.isIntersecting){
-
-let img = entry.target;
-img.src = img.dataset.src || img.src;
-
-observer.unobserve(img);
-
-}
-
-});
-
-});
-
-lazyImages.forEach(function(img){
-observer.observe(img);
-});
-
-}
-
-});
-</script>
-<script>
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
-
-hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-});
-</script>
-<!-- ================= SCRIPT ================= -->
+<!-- Scripts -->
+<!-- DOMPurify to prevent XSS before rendering product titles fetched from API -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 <script src="scripts/app.js" defer></script>
-<script src="scripts/auth.js" defer></script>
-
 
 </body>
 </html>
